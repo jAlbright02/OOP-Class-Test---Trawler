@@ -1,41 +1,62 @@
 package ie.atu;
 
+import com.sun.jdi.InvalidTypeException;
+
+import javax.naming.InvalidNameException;
+
 public class Trawler {
 
     private String name;
 
     private String typeTrawler;
 
-    private int transponderID;
+    private String transponderID;
 
-    public Trawler(String name, String typeTrawler, int transponderID) {
-        this.name = name;
-        this.typeTrawler = typeTrawler;
-        this.transponderID = transponderID;
+    public Trawler(String name, String typeTrawler, String transponderID) throws InvalidNameException, InvalidTypeException {
+
+        setName(name);
+        setTypeTrawler(typeTrawler);
+        setTransponderID(transponderID);
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String name) throws InvalidNameException {
+        if (name.length() < 7 || name.length() > 24) {
+            throw new InvalidNameException("Name of trawler invalid: " + name);
+        }
+        else {
+            this.name = name;
+        }
     }
 
     public String getTypeTrawler() {
         return typeTrawler;
     }
 
-    public void setTypeTrawler(String typeTrawler) {
-        this.typeTrawler = typeTrawler;
+    public void setTypeTrawler(String typeTrawler) throws InvalidTypeException {
+        if (typeTrawler == "Freezer" || typeTrawler ==  "Stern" || typeTrawler ==  "Outrigger")
+        {
+            this.typeTrawler = typeTrawler;
+        }
+        else {
+            throw new InvalidTypeException("Type of trawler invalid: " + typeTrawler);
+        }
     }
 
-    public int getTransponderID() {
+    public String getTransponderID() {
         return transponderID;
     }
 
-    public void setTransponderID(int transponderID) {
-        this.transponderID = transponderID;
+    public void setTransponderID(String transponderID) {
+        if (transponderID.length() == 11) {
+            this.transponderID = transponderID;
+        }
+        else {
+            throw new NumberFormatException("TransponderID invalid: " + transponderID);
+        }
     }
 
     public String toString() {
@@ -43,3 +64,4 @@ public class Trawler {
                 "\nTrawler type: " + typeTrawler;
     }
 }
+
