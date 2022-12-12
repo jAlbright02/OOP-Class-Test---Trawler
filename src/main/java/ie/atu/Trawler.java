@@ -25,7 +25,7 @@ public class Trawler {
 
     public void setName(String name) throws InvalidNameException {
         if (name.length() < 7 || name.length() > 24) {
-            throw new InvalidNameException("Name of trawler invalid: " + name);
+            throw new InvalidNameException();
         }
         else {
             this.name = name;
@@ -42,7 +42,7 @@ public class Trawler {
             this.typeTrawler = typeTrawler;
         }
         else {
-            throw new InvalidTypeException("Type of trawler invalid: " + typeTrawler);
+            throw new InvalidTypeException();
         }
     }
 
@@ -55,13 +55,13 @@ public class Trawler {
             this.transponderID = transponderID;
         }
         else {
-            throw new NumberFormatException("TransponderID invalid: " + transponderID);
+            throw new NumberFormatException();
         }
     }
 
     public String toString() {
         return "Trawler name: " + name + "\nTransponder ID: " + transponderID +
-                "\nTrawler type: " + typeTrawler;
+                "\nTrawler type: " + typeTrawler + "\n";
     }
 }
 
